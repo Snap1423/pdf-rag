@@ -26,7 +26,7 @@ retriever = vector_store.as_retriever(
 
 # Create LLM
 llm = ChatGoogleGenerativeAI(
-    model=os.getenv("GEMINI_MODEL", "gemini-3.8-flash"),
+    model=os.getenv("GEMINI_MODEL", "gemini-3.5-flash"),
     temperature=0,
     request_timeout=float(os.getenv("GEMINI_TIMEOUT_SECONDS", "60")),
     max_retries=1,
@@ -41,7 +41,7 @@ def ask_question(query):
     )
 
     # Check relevance
-    if not results or results[0][1] > 1.0:
+    if not results or results[0][1] > 1.5:
         return "I don't know based on the provided document.", []
 
     # Extract documents
